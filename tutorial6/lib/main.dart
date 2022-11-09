@@ -49,8 +49,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  String textType = "GENAP";
-  bool styleType = true;
 
   void _incrementCounter() {
     setState(() {
@@ -60,36 +58,8 @@ class _MyHomePageState extends State<MyHomePage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter++;
-      if(_counter % 2 == 0){
-          textType = "GENAP";
-          styleType = true;
-
-        } else{
-          textType="GANJIL";
-          styleType = false;
-
-        }
     });
   }
-  void decrementCounter() {
-    setState(() {
-      if (_counter != 0) {
-        _counter--;
-        if(_counter % 2 == 0){
-          textType = "GENAP";
-          styleType = true;
-
-        } else{
-          textType="GANJIL";
-          styleType = false;
-
-        }
-      }
-      
-    });
-  }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -125,14 +95,9 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Container(
-              padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-              child: Text('$textType', 
-                style: styleType
-                      ? TextStyle(color: Colors.red)
-                      : TextStyle(color:Colors.blue),)
+            const Text(
+              'You have pushed the button this many times:',
             ),
-
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
@@ -140,23 +105,11 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: Container(
-        padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            FloatingActionButton(
-              onPressed: decrementCounter,
-              child: Icon(Icons.remove),
-            ),
-            FloatingActionButton(
-              onPressed: _incrementCounter,
-              child: Icon(Icons.add),
-            ),
-          ],
-        ),
-      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
